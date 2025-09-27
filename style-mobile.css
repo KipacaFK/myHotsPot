@@ -861,7 +861,8 @@ a:active {
   cursor: pointer;
   border: none;
   background-color: transparent;
-  color: #555;
+  /* color: #555; */
+  color: #ffffff;
   font-size: 16px;
   font-weight: 600;
   transition: color 0.3s, background-color 0.3s;
@@ -872,14 +873,16 @@ a:active {
 /* Efeito hover para os botões */
 .pure-tab-button:hover:not(.active) {
   background-color: #eee;
-  color: #333;
+  color: #a7a0a0;
 }
 
 /* Estilo da aba ativa */
 .pure-tab-button.active {
-  color: #007bff; /* Cor primária azul */
+  color: #94bfeb;
+  /* color: #007bff; Cor primária azul */
   border-bottom-color: #007bff;
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: #e4e7e1;
 }
 
 /* Área do conteúdo */
