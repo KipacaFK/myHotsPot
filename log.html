@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<!--
+Design by TRUE Software
+http://www.my-cybercafe.com
+-->
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <title>MyHotspot - Seu login</title>
+    <script type="text/javascript" src="jquery-1.4.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style-mobile.css" />
+
+    <script type="text/javascript">
+      /*<![CDATA[*/
+
+      function ShowErrorMsg(Error) {
+        $(document).ready(function () {
+          document.getElementById("ErrorMsg").firstChild.data =
+            document.getElementById(Error + "Msg").firstChild.data;
+          document.getElementById("InfoMsgDisplay").style.display = "none";
+          document.getElementById("ErrorMsgDisplay").style.display = "block";
+        });
+      }
+
+      function ShowInfoMsg(Info) {
+        $(document).ready(function () {
+          document.getElementById("InfoMsg").firstChild.data =
+            document.getElementById(Info + "Msg").firstChild.data;
+          document.getElementById("InfoMsgDisplay").style.display = "block";
+        });
+      }
+
+      var pp_MinAmount = 100;
+      var pp_MaxAmount = 10000000;
+      var pp_Step = 50;
+      var pp_DecimalSeperator = ",";
+
+      function GetAmountString(aCentsAmount) {
+        if (isNaN(aCentsAmount)) {
+          return "1.00";
+        } else {
+          var str =
+            aCentsAmount / 100 +
+            (aCentsAmount % 100 == 0 ? ".0" : "") +
+            (aCentsAmount % 10 == 0 ? "0" : "");
+
+          return str.replace(".", pp_DecimalSeperator);
+        }
+      }
+
+      function SetPayPalAmount(aAmount) {
+        document.getElementById("PPamount").value = isNaN(aAmount)
+          ? "100"
+          : aAmount;
+        document.getElementById("DisplayAmount").firstChild.data =
+          GetAmountString(aAmount);
+      }
+
+      function OnPPBtnClick(btn) {
+        var amount = 100;
+        if (btn == 1) {
+          amount = Math.min(
+            parseInt(document.getElementById("PPamount").value) + pp_Step,
+            pp_MaxAmount
+          );
+        } else if (btn == 2) {
+          amount = Math.max(
+            parseInt(document.getElementById("PPamount").value) - pp_Step,
+            pp_MinAmount
+          );
+        }
+
+        SetPayPalAmount(amount);
+      }
+
+      function toggleCheckbox(element) {
+        document.getElementById("_freewifibtn").disabled = !element.checked;
+      }
+
+      function DisplayFlatTarif() {
+        $(document).ready(function () {
+          try {
+            document.getElementById("_flatprice").firstChild.data = "";
+            var PricingIndex =
+              document.getElementById("_flatpricing").options[
+                document.getElementById("_flatpricing").selectedIndex
+              ].value;
+            document.getElementById("_flatprice").firstChild.data =
+              document.getElementById(
+                "price" + "_" + PricingIndex
+              ).firstChild.data;
+          } catch (err) {}
+        });
+      }
+
+      $(document).ready(function () {});
+
+      //6F143793-ACE5-4C04-93EA-C593CD76DC47
+
+      /*]]>*/
+    </script>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="PageTitle">
+        <div class="logo">
+          <img
+            src="img/542964430_122095485057014615_88386326146817420_n.jpg"
+            alt=""
+          />
+        </div>
+        <div class="logocaption">Bem-vindo ao Wi-Fi Comunitário</div>
+      </div>
+
+      <div class="NewPage" id="ErrorMsgDisplay" style="display: none">
+        <div class="MessagePageLogo ErrorPage MessagePageText" id="ErrorMsg">
+          &nbsp;
+        </div>
+      </div>
+
+      <div class="NewPage" id="WarningMsgDisplay" style="display: none">
+        <div
+          class="MessagePageLogo WarningPage MessagePageText"
+          id="WarningMsg"
+        >
+          &nbsp;
+        </div>
+      </div>
+
+      <div class="NewPage" id="InfoMsgDisplay" style="display: none">
+        <div class="MessagePageLogo InfoPage MessagePageText" id="InfoMsg">
+          &nbsp;
+        </div>
+      </div>
+
+      <noscript>
+        <div class="NewPage">
+          <div class="MessagePageLogo WarningPage MessagePageText">
+            Esta p&aacute;gina necessita do Javascript. Ative o JavaScript no
+            seu navegador.
+          </div>
+        </div>
+      </noscript>
+
+      <div class="PageLogin">
+        <div class="pure-tabs-container">
+          <!-- Navegação (Botões) -->
+          <div class="pure-tabs-nav">
+            <button class="pure-tab-button active" data-target="panel-1">
+              Detalhes do Produto
+            </button>
+            <button class="pure-tab-button" data-target="panel-2">
+              Avaliações e Suporte
+            </button>
+          </div>
+
+          <!-- Conteúdo -->
+          <div class="pure-tabs-content">
+            <!-- Painel 1 (Visível por padrão) -->
+            <div id="panel-1" class="pure-tab-panel active">
+              <div class="PageLoginHeader">Conta de usu&aacute;rio</div>
+              <div class="PageLoginLogo PageLoginLogoUser">
+                <div class="PageLoginLogoText">
+                  Voc&ecirc; pode fazer login usando seu nome de usu&aacute;rio
+                  e senha:
+                </div>
+              </div>
+              <form action="./" method="post">
+                <div>
+                  <input type="hidden" name="_action" value="userlogin" />
+                </div>
+                <div>
+                  <label>Nome de usu&aacute;rio:</label>
+                  <input
+                    tabindex="1"
+                    name="_user"
+                    value=""
+                    autocomplete="off"
+                    type="text"
+                  />
+                </div>
+                <div>
+                  <label>Senha:</label>
+                  <input
+                    tabindex="2"
+                    name="_pass"
+                    autocomplete="off"
+                    type="password"
+                  />
+                </div>
+                <div>
+                  <input tabindex="3" value="Login" type="submit" />
+                </div>
+              </form>
+
+              <div class="services">
+                <a class="service default" href="changepassword.html"
+                  ><span class="logo">&nbsp;</span>Alterar sua senha</a
+                >
+
+                <a class="service default" href="addmoney.html"
+                  ><span class="logo">&nbsp;</span>Adicionar crédito</a
+                >
+
+                <a class="service default" href="createaccount.html"
+                  ><span class="logo">&nbsp;</span>Criar uma conta de usuário</a
+                >
+              </div>
+            </div>
+
+            <!-- Painel 2 (Oculto por padrão) -->
+            <div id="panel-2" class="pure-tab-panel">
+              <div class="PageLogin">
+                <div class="PageLoginHeader">C&oacute;digo Pr&eacute;-pago</div>
+                <div class="PageLoginLogo PageLoginLogoCode">
+                  <div class="PageLoginLogoText">
+                    Voc&ecirc; pode fazer login usando o seu C&oacute;digo
+                    Pr&eacute;-pago v&aacute;lido:
+                  </div>
+                </div>
+                <form action="./" method="post">
+                  <div>
+                    <input type="hidden" name="_action" value="codelogin" />
+                  </div>
+                  <div>
+                    <label>C&oacute;digo Pr&eacute;-pago:</label>
+                    <input
+                      tabindex="4"
+                      name="_code"
+                      value=""
+                      autocomplete="off"
+                      type="text"
+                    />
+                  </div>
+
+                  <div>
+                    <input tabindex="5" value="Login" type="submit" />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--         <div class="PageLoginHeader">Conta de usu&aacute;rio</div>
+        <div class="PageLoginLogo PageLoginLogoUser">
+          <div class="PageLoginLogoText">
+            Voc&ecirc; pode fazer login usando seu nome de usu&aacute;rio e
+            senha:
+          </div>
+        </div>
+        <form action="./" method="post">
+          <div><input type="hidden" name="_action" value="userlogin" /></div>
+          <div>
+            <label>Nome de usu&aacute;rio:</label>
+            <input
+              tabindex="1"
+              name="_user"
+              value=""
+              autocomplete="off"
+              type="text"
+            />
+          </div>
+          <div>
+            <label>Senha:</label>
+            <input
+              tabindex="2"
+              name="_pass"
+              autocomplete="off"
+              type="password"
+            />
+          </div>
+          <div>
+            <input tabindex="3" value="Login" type="submit" />
+          </div>
+        </form> -->
+
+        <!-- <div class="services">
+          <a class="service default" href="changepassword.html"
+            ><span class="logo">&nbsp;</span>Alterar sua senha</a
+          >
+
+          <a class="service default" href="addmoney.html"
+            ><span class="logo">&nbsp;</span>Adicionar crédito</a
+          >
+
+          <a class="service default" href="createaccount.html"
+            ><span class="logo">&nbsp;</span>Criar uma conta de usuário</a
+          >
+        </div> -->
+      </div>
+      <!-- 
+      <div class="PageLogin">
+        <div class="PageLoginHeader">C&oacute;digo Pr&eacute;-pago</div>
+        <div class="PageLoginLogo PageLoginLogoCode">
+          <div class="PageLoginLogoText">
+            Voc&ecirc; pode fazer login usando o seu C&oacute;digo
+            Pr&eacute;-pago v&aacute;lido:
+          </div>
+        </div>
+        <form action="./" method="post">
+          <div><input type="hidden" name="_action" value="codelogin" /></div>
+          <div>
+            <label>C&oacute;digo Pr&eacute;-pago:</label>
+            <input
+              tabindex="4"
+              name="_code"
+              value=""
+              autocomplete="off"
+              type="text"
+            />
+          </div>
+
+          <div>
+            <input tabindex="5" value="Login" type="submit" />
+          </div>
+        </form>
+      </div> -->
+
+      <div class="NewPage Footer">
+        Efetuando o Login voc&ecirc; est&aacute; aceitando os nossos
+        <a href="termsofuse.html">Termos de Uso</a>
+      </div>
+    </div>
+
+    <div style="display: none">
+      <p id="InvalidUsernameMsg">
+        O nome de usu&aacute;rio digitado &eacute; inv&aacute;lido. Por favor,
+        tente de novo.
+      </p>
+      <p id="InvalidPasswordMsg">
+        A senha digitada &eacute; inv&aacute;lida. Por favor, tente de novo.
+      </p>
+      <p id="InvalidCodeMsg">
+        O C&oacute;digo pr&eacute;-pago digitado &eacute; inv&aacute;lido. Por
+        favor, tente de novo.
+      </p>
+      <p id="NoMinCreditMsg">
+        O seu cr&eacute;dito n&atilde;o &eacute; suficiente. Por favor, adicione
+        cr&eacute;dito.
+      </p>
+      <p id="DisabledUseraccountMsg">
+        Sua conta est&aacute; desativada. Entre em contato com a equipe de
+        servi&ccedil;o
+      </p>
+      <p id="ExpiredUseraccountMsg">
+        Sua conta expirou. Entre em contato com a equipe de servi&ccedil;o.
+      </p>
+      <p id="UseraccountInUseMsg">
+        Sua conta est&aacute; atualmente ativa em um dos terminais. Entre em
+        contato com a equipe de servi&ccedil;o.
+      </p>
+      <p id="DisabledCodeaccountMsg">
+        O C&oacute;digo pr&eacute;-pago digitado est&aacute; desativado. Entre
+        em contato com a equipe de servi&ccedil;o.
+      </p>
+      <p id="ExpiredCodeaccountMsg">
+        O C&oacute;digo Pr&eacute;-pago digitado &eacute; expirado. Entre em
+        contato com a equipe de servi&ccedil;o.
+      </p>
+      <p id="CodeaccountInUseMsg">
+        O C&oacute;digo Pr&eacute;-pago digitado est&aacute; atualmente ativo em
+        um dos terminais. Entre em contato com a equipe de servi&ccedil;o.
+      </p>
+      <p id="ZeroCodeCreditMsg">
+        O C&oacute;digo de cr&eacute;dito foi utilizado.
+      </p>
+      <p id="UsernameExistsMsg">
+        Esse nome de usu&aacute;rio j&aacute; existe. Por favor tente um nome de
+        usu&aacute;rio diferente.
+      </p>
+      <p id="DisabledServiceMsg">
+        Desculpe, este servi&ccedil;o n&atilde;o est&aacute; dispon&iacute;vel
+        no momento. Por favor, tente de novo mais tarde.
+      </p>
+      <p id="PayPalyLoginErrMsg">
+        Um erro ocorreu ao tentar para entrar. Entre em contato com a equipe de
+        servi&ccedil;o.
+      </p>
+    </div>
+
+    <script>
+      // -----------------------------------------------------------------
+      // LÓGICA JAVASCRIPT PURO
+      // -----------------------------------------------------------------
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // 1. Seleciona todos os botões de aba
+        const buttons = document.querySelectorAll(".pure-tab-button");
+        // 2. Seleciona todos os painéis de conteúdo
+        const panels = document.querySelectorAll(".pure-tab-panel");
+
+        // Função principal para lidar com a troca de abas
+        function switchTab(clickedButton) {
+          // A. Desativa todos os botões
+          buttons.forEach((button) => {
+            button.classList.remove("active");
+          });
+
+          // B. Oculta todos os painéis
+          panels.forEach((panel) => {
+            panel.classList.remove("active");
+          });
+
+          // C. Ativa o botão que foi clicado
+          clickedButton.classList.add("active");
+
+          // D. Obtém o ID do painel alvo a partir do atributo 'data-target'
+          const targetPanelId = clickedButton.getAttribute("data-target");
+          const targetPanel = document.getElementById(targetPanelId);
+
+          // E. Mostra o painel alvo
+          if (targetPanel) {
+            targetPanel.classList.add("active");
+          } else {
+            console.error("Painel alvo não encontrado:", targetPanelId);
+          }
+        }
+
+        // Adiciona o listener de evento a cada botão
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            switchTab(button);
+          });
+        });
+
+        // Opcional: Garante que a primeira aba esteja ativa ao carregar,
+        // caso o HTML não tenha definido o estado inicial corretamente.
+        if (buttons.length > 0) {
+          switchTab(buttons[0]);
+        }
+      });
+    </script>
+  </body>
+</html>
