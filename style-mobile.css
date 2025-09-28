@@ -12,11 +12,12 @@ body {
   background: #e4e7e1;
 }
 
+/* Corrigido: Removida a largura fixa do wrap. O max-width permanece para desktop. */
 .wrap {
   position: relative;
-  width: auto;
+  width: 98%; /* Usar 98% para dar uma pequena margem nos lados */
   max-width: 640px;
-  margin: 0 auto;
+  margin: 0 auto; /* Centraliza o wrapper */
   padding: 0px;
 }
 
@@ -28,11 +29,14 @@ a:active {
   text-decoration: none;
 }
 
+
+
+/* Corrigido: Margens laterais ajustadas para garantir espaço em mobile sem overflow */
 .PageLogin {
   width: auto;
   background: #b9cede;
   border: 1px solid #dfdddd;
-  margin: 10px 5px 27px 5px;
+  margin: 10px 1% 27px 1%; /* Margem lateral percentual */
   border-radius: 0 0 0 0.4em;
   -o-border-radius: 0 0 0 0.4em;
   -moz-border-radius: 0 0 0 0.4em;
@@ -832,84 +836,102 @@ a:active {
 }
 
 /* ----------------------------------------------------------------- */
-/* ESTILOS CSS PURO PARA O COMPONENTE DE ABAS */
+/* ESTILOS PARA AS ABAS DE NAVEGAÇÃO (Tabs) */
 /* ----------------------------------------------------------------- */
 
-/* Container principal */
+/* Otimizado: Margem 0 para evitar que o container das abas saia do .PageLogin */
 .pure-tabs-container {
-  max-width: 600px;
-  margin: 20px auto;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-  background-color: #fff;
+    max-width: 100%; 
+    margin: 0; 
+    padding-top: 15px; /* Adiciona algum espaço acima do container das abas */
+    border: none; /* Remove a borda para se integrar melhor ao .PageLogin */
+    border-radius: 0;
+    overflow: hidden; 
+    background-color: transparent; /* Transparente para usar o fundo do .PageLogin */
+    box-shadow: none;
 }
 
-/* Área dos botões de navegação */
+/* Área de navegação das abas */
 .pure-tabs-nav {
-  display: flex;
-  border-bottom: 2px solid #ddd;
-  background-color: #f7f7f7;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid #ccc;
+    background-color: #f0f0f0; /* Fundo mais claro para as abas */
 }
 
 /* Estilo base dos botões de aba */
 .pure-tab-button {
-  flex: 1;
-  padding: 12px 20px;
-  text-align: center;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  /* color: #555; */
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
-  transition: color 0.3s, background-color 0.3s;
-  border-bottom: 3px solid transparent;
-  outline: none; /* Remove o contorno padrão do foco */
+    flex: 1; 
+    padding: 12px 5px; /* Mais compacto para mobile */
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: #555;
+    font-size: 14px;
+    font-weight: bold;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 3px solid transparent; 
+    outline: none;
+    text-transform: uppercase;
+    white-space: nowrap; /* Impede que o texto quebre a linha */
 }
 
-/* Efeito hover para os botões */
+/* Efeito hover para os botões inativos */
 .pure-tab-button:hover:not(.active) {
-  background-color: #eee;
-  color: #a7a0a0;
+    color: #000;
+    background-color: #e0e0e0;
 }
 
 /* Estilo da aba ativa */
 .pure-tab-button.active {
-  color: #94bfeb;
-  /* color: #007bff; Cor primária azul */
-  border-bottom-color: #007bff;
-  /* background-color: #fff; */
-  background-color: #e4e7e1;
+    color: #007bff; 
+    border-bottom-color: #007bff; 
+    background-color: #fff; /* Fundo branco para a aba ativa */
 }
 
 /* Área do conteúdo */
 .pure-tabs-content {
-  padding: 20px;
+    padding: 15px 15px 5px 15px; /* Ajusta o padding para o conteúdo interno */
+    background-color: #fff; /* Fundo branco para o painel de conteúdo */
 }
 
 /* Estilo dos painéis de conteúdo */
 .pure-tab-panel {
-  /* Oculto por padrão, será mostrado pelo JS */
-  display: none;
-  animation: fadeIn 0.4s ease-out; /* Adiciona uma transição suave */
+    display: none; 
+    animation: fadeIn 0.4s ease-out; 
+    padding: 10px; /* Adiciona padding dentro do painel para o conteúdo */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
 }
 
 /* Estilo para mostrar o painel ativo */
 .pure-tab-panel.active {
-  display: block;
+    display: block;
 }
 
-/* Animação de fade-in */
+/* Animação de fade-in para a transição do conteúdo */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- Media Query para Mobile (Reajustado) --- */
+@media (max-width: 480px) {
+    .PageLogin {
+        margin: 10px 0; /* Margem 0 nas laterais em ecrãs muito pequenos */
+        border-radius: 0; /* Sem cantos arredondados nas laterais para ecrãs pequenos */
+    }
+    .pure-tab-button {
+        font-size: 12px;
+        padding: 10px 2px;
+    }
+    .pure-tabs-content {
+        padding: 0 5px; /* Reduz o padding do container de conteúdo */
+    }
+}
+
+/* ----------------------------------------------------------------- */
+/* Se existirem outros estilos no seu ficheiro, eles devem vir aqui. */
+/* ----------------------------------------------------------------- */

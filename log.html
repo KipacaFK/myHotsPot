@@ -14,98 +14,9 @@ http://www.my-cybercafe.com
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
     <title>MyHotspot - Seu login</title>
+    <!-- O ficheiro jquery-1.4.3.min.js é carregado aqui -->
     <script type="text/javascript" src="jquery-1.4.3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style-mobile.css" />
-
-    <script type="text/javascript">
-      /*<![CDATA[*/
-
-      function ShowErrorMsg(Error) {
-        $(document).ready(function () {
-          document.getElementById("ErrorMsg").firstChild.data =
-            document.getElementById(Error + "Msg").firstChild.data;
-          document.getElementById("InfoMsgDisplay").style.display = "none";
-          document.getElementById("ErrorMsgDisplay").style.display = "block";
-        });
-      }
-
-      function ShowInfoMsg(Info) {
-        $(document).ready(function () {
-          document.getElementById("InfoMsg").firstChild.data =
-            document.getElementById(Info + "Msg").firstChild.data;
-          document.getElementById("InfoMsgDisplay").style.display = "block";
-        });
-      }
-
-      var pp_MinAmount = 100;
-      var pp_MaxAmount = 10000000;
-      var pp_Step = 50;
-      var pp_DecimalSeperator = ",";
-
-      function GetAmountString(aCentsAmount) {
-        if (isNaN(aCentsAmount)) {
-          return "1.00";
-        } else {
-          var str =
-            aCentsAmount / 100 +
-            (aCentsAmount % 100 == 0 ? ".0" : "") +
-            (aCentsAmount % 10 == 0 ? "0" : "");
-
-          return str.replace(".", pp_DecimalSeperator);
-        }
-      }
-
-      function SetPayPalAmount(aAmount) {
-        document.getElementById("PPamount").value = isNaN(aAmount)
-          ? "100"
-          : aAmount;
-        document.getElementById("DisplayAmount").firstChild.data =
-          GetAmountString(aAmount);
-      }
-
-      function OnPPBtnClick(btn) {
-        var amount = 100;
-        if (btn == 1) {
-          amount = Math.min(
-            parseInt(document.getElementById("PPamount").value) + pp_Step,
-            pp_MaxAmount
-          );
-        } else if (btn == 2) {
-          amount = Math.max(
-            parseInt(document.getElementById("PPamount").value) - pp_Step,
-            pp_MinAmount
-          );
-        }
-
-        SetPayPalAmount(amount);
-      }
-
-      function toggleCheckbox(element) {
-        document.getElementById("_freewifibtn").disabled = !element.checked;
-      }
-
-      function DisplayFlatTarif() {
-        $(document).ready(function () {
-          try {
-            document.getElementById("_flatprice").firstChild.data = "";
-            var PricingIndex =
-              document.getElementById("_flatpricing").options[
-                document.getElementById("_flatpricing").selectedIndex
-              ].value;
-            document.getElementById("_flatprice").firstChild.data =
-              document.getElementById(
-                "price" + "_" + PricingIndex
-              ).firstChild.data;
-          } catch (err) {}
-        });
-      }
-
-      $(document).ready(function () {});
-
-      //6F143793-ACE5-4C04-93EA-C593CD76DC47
-
-      /*]]>*/
-    </script>
   </head>
 
   <body>
@@ -151,6 +62,7 @@ http://www.my-cybercafe.com
       </noscript>
 
       <div class="PageLogin">
+        <!-- Otimização: O container das abas foi movido para dentro do PageLogin. -->
         <div class="pure-tabs-container">
           <!-- Navegação (Botões) -->
           <div class="pure-tabs-nav">
@@ -173,6 +85,7 @@ http://www.my-cybercafe.com
                   e senha:
                 </div>
               </div>
+              <!-- O FORMULÁRIO DE LOGIN DE USUÁRIO PERMANECE INTACTO -->
               <form action="./" method="post">
                 <div>
                   <input type="hidden" name="_action" value="userlogin" />
@@ -218,119 +131,45 @@ http://www.my-cybercafe.com
 
             <!-- Painel 2 (Oculto por padrão) -->
             <div id="panel-2" class="pure-tab-panel">
-              <div class="PageLogin">
-                <div class="PageLoginHeader">C&oacute;digo Pr&eacute;-pago</div>
-                <div class="PageLoginLogo PageLoginLogoCode">
-                  <div class="PageLoginLogoText">
-                    Voc&ecirc; pode fazer login usando o seu C&oacute;digo
-                    Pr&eacute;-pago v&aacute;lido:
-                  </div>
+              <div class="PageLoginHeader">C&oacute;digo Pr&eacute;-pago</div>
+              <div class="PageLoginLogo PageLoginLogoCode">
+                <div class="PageLoginLogoText">
+                  Voc&ecirc; pode fazer login usando o seu C&oacute;digo
+                  Pr&eacute;-pago v&aacute;lido:
                 </div>
-                <form action="./" method="post">
-                  <div>
-                    <input type="hidden" name="_action" value="codelogin" />
-                  </div>
-                  <div>
-                    <label>C&oacute;digo Pr&eacute;-pago:</label>
-                    <input
-                      tabindex="4"
-                      name="_code"
-                      value=""
-                      autocomplete="off"
-                      type="text"
-                    />
-                  </div>
-
-                  <div>
-                    <input tabindex="5" value="Login" type="submit" />
-                  </div>
-                </form>
               </div>
+              <!-- O FORMULÁRIO DE LOGIN DE CÓDIGO PERMANECE INTACTO -->
+              <form action="./" method="post">
+                <div>
+                  <input type="hidden" name="_action" value="codelogin" />
+                </div>
+                <div>
+                  <label>C&oacute;digo Pr&eacute;-pago:</label>
+                  <input
+                    tabindex="4"
+                    name="_code"
+                    value=""
+                    autocomplete="off"
+                    type="text"
+                  />
+                </div>
+
+                <div>
+                  <input tabindex="5" value="Login" type="submit" />
+                </div>
+              </form>
             </div>
           </div>
         </div>
-
-        <!--         <div class="PageLoginHeader">Conta de usu&aacute;rio</div>
-        <div class="PageLoginLogo PageLoginLogoUser">
-          <div class="PageLoginLogoText">
-            Voc&ecirc; pode fazer login usando seu nome de usu&aacute;rio e
-            senha:
-          </div>
-        </div>
-        <form action="./" method="post">
-          <div><input type="hidden" name="_action" value="userlogin" /></div>
-          <div>
-            <label>Nome de usu&aacute;rio:</label>
-            <input
-              tabindex="1"
-              name="_user"
-              value=""
-              autocomplete="off"
-              type="text"
-            />
-          </div>
-          <div>
-            <label>Senha:</label>
-            <input
-              tabindex="2"
-              name="_pass"
-              autocomplete="off"
-              type="password"
-            />
-          </div>
-          <div>
-            <input tabindex="3" value="Login" type="submit" />
-          </div>
-        </form> -->
-
-        <!-- <div class="services">
-          <a class="service default" href="changepassword.html"
-            ><span class="logo">&nbsp;</span>Alterar sua senha</a
-          >
-
-          <a class="service default" href="addmoney.html"
-            ><span class="logo">&nbsp;</span>Adicionar crédito</a
-          >
-
-          <a class="service default" href="createaccount.html"
-            ><span class="logo">&nbsp;</span>Criar uma conta de usuário</a
-          >
-        </div> -->
       </div>
-      <!-- 
-      <div class="PageLogin">
-        <div class="PageLoginHeader">C&oacute;digo Pr&eacute;-pago</div>
-        <div class="PageLoginLogo PageLoginLogoCode">
-          <div class="PageLoginLogoText">
-            Voc&ecirc; pode fazer login usando o seu C&oacute;digo
-            Pr&eacute;-pago v&aacute;lido:
-          </div>
-        </div>
-        <form action="./" method="post">
-          <div><input type="hidden" name="_action" value="codelogin" /></div>
-          <div>
-            <label>C&oacute;digo Pr&eacute;-pago:</label>
-            <input
-              tabindex="4"
-              name="_code"
-              value=""
-              autocomplete="off"
-              type="text"
-            />
-          </div>
-
-          <div>
-            <input tabindex="5" value="Login" type="submit" />
-          </div>
-        </form>
-      </div> -->
-
+      
       <div class="NewPage Footer">
         Efetuando o Login voc&ecirc; est&aacute; aceitando os nossos
         <a href="termsofuse.html">Termos de Uso</a>
       </div>
     </div>
 
+    <!-- O bloco de mensagens oculto permanece inalterado -->
     <div style="display: none">
       <p id="InvalidUsernameMsg">
         O nome de usu&aacute;rio digitado &eacute; inv&aacute;lido. Por favor,
@@ -387,57 +226,144 @@ http://www.my-cybercafe.com
       </p>
     </div>
 
-    <script>
+    <script type="text/javascript">
       // -----------------------------------------------------------------
-      // LÓGICA JAVASCRIPT PURO
+      // LÓGICA JAVASCRIPT/JQUERY PARA AS ABAS E FUNÇÕES DO BACKEND
+      // Compatível com jQuery 1.4.3
       // -----------------------------------------------------------------
 
-      document.addEventListener("DOMContentLoaded", () => {
-        // 1. Seleciona todos os botões de aba
-        const buttons = document.querySelectorAll(".pure-tab-button");
-        // 2. Seleciona todos os painéis de conteúdo
-        const panels = document.querySelectorAll(".pure-tab-panel");
+      /*<![CDATA[*/
 
-        // Função principal para lidar com a troca de abas
-        function switchTab(clickedButton) {
-          // A. Desativa todos os botões
-          buttons.forEach((button) => {
-            button.classList.remove("active");
+      // Função principal que corre quando o DOM estiver pronto.
+      jQuery(document).ready(function($) { // Passamos '$' para a função para usá-lo dentro deste escopo.
+        
+        // -----------------------------------------------------------------
+        // 1. LÓGICA DAS ABAS (Implementação jQuery 1.4.3)
+        // -----------------------------------------------------------------
+        
+        // Seleciona todos os botões de aba com a classe 'pure-tab-button'
+        $('.pure-tab-button').click(function() {
+            var $clickedButton = $(this);
+            
+            // Remove a classe 'active' de todos os botões e painéis
+            $('.pure-tab-button').removeClass('active');
+            $('.pure-tab-panel').removeClass('active');
+            
+            // Ativa o botão clicado
+            $clickedButton.addClass('active');
+            
+            // Obtém o ID do painel alvo (ex: "panel-1") e constrói o seletor (#panel-1)
+            var targetId = $clickedButton.attr('data-target');
+            
+            // Mostra o painel alvo
+            $('#' + targetId).addClass('active');
+        });
+
+        // -----------------------------------------------------------------
+        // 2. CÓDIGO EXISTENTE (Funções de Mensagens, Créditos, etc.)
+        //    As chamadas de função do backend permanecem inalteradas para máxima compatibilidade.
+        // -----------------------------------------------------------------
+        
+        function ShowErrorMsg(Error) {
+          $(document).ready(function () {
+            document.getElementById("ErrorMsg").firstChild.data =
+              document.getElementById(Error + "Msg").firstChild.data;
+            document.getElementById("InfoMsgDisplay").style.display = "none";
+            document.getElementById("ErrorMsgDisplay").style.display = "block";
           });
+        }
 
-          // B. Oculta todos os painéis
-          panels.forEach((panel) => {
-            panel.classList.remove("active");
+        function ShowInfoMsg(Info) {
+          $(document).ready(function () {
+            document.getElementById("InfoMsg").firstChild.data =
+              document.getElementById(Info + "Msg").firstChild.data;
+            document.getElementById("InfoMsgDisplay").style.display = "block";
           });
+        }
 
-          // C. Ativa o botão que foi clicado
-          clickedButton.classList.add("active");
+        var pp_MinAmount = 100;
+        var pp_MaxAmount = 10000000;
+        var pp_Step = 50;
+        var pp_DecimalSeperator = ",";
 
-          // D. Obtém o ID do painel alvo a partir do atributo 'data-target'
-          const targetPanelId = clickedButton.getAttribute("data-target");
-          const targetPanel = document.getElementById(targetPanelId);
-
-          // E. Mostra o painel alvo
-          if (targetPanel) {
-            targetPanel.classList.add("active");
+        function GetAmountString(aCentsAmount) {
+          if (isNaN(aCentsAmount)) {
+            return "1.00";
           } else {
-            console.error("Painel alvo não encontrado:", targetPanelId);
+            var str =
+              aCentsAmount / 100 +
+              (aCentsAmount % 100 == 0 ? ".0" : "") +
+              (aCentsAmount % 10 == 0 ? "0" : "");
+
+            return str.replace(".", pp_DecimalSeperator);
           }
         }
 
-        // Adiciona o listener de evento a cada botão
-        buttons.forEach((button) => {
-          button.addEventListener("click", () => {
-            switchTab(button);
-          });
-        });
-
-        // Opcional: Garante que a primeira aba esteja ativa ao carregar,
-        // caso o HTML não tenha definido o estado inicial corretamente.
-        if (buttons.length > 0) {
-          switchTab(buttons[0]);
+        function SetPayPalAmount(aAmount) {
+          var ppAmountElement = document.getElementById("PPamount");
+          if (ppAmountElement) {
+              ppAmountElement.value = isNaN(aAmount) ? "100" : aAmount;
+          }
+          var displayAmountElement = document.getElementById("DisplayAmount");
+          if (displayAmountElement && displayAmountElement.firstChild) {
+              displayAmountElement.firstChild.data = GetAmountString(aAmount);
+          }
         }
-      });
+
+        function OnPPBtnClick(btn) {
+          var amount = 100;
+          var ppAmountElement = document.getElementById("PPamount");
+          var ppAmountValue = ppAmountElement ? parseInt(ppAmountElement.value) : 100;
+
+          if (btn == 1) {
+            amount = Math.min(
+              ppAmountValue + pp_Step,
+              pp_MaxAmount
+            );
+          } else if (btn == 2) {
+            amount = Math.max(
+              ppAmountValue - pp_Step,
+              pp_MinAmount
+            );
+          }
+
+          SetPayPalAmount(amount);
+        }
+
+        function toggleCheckbox(element) {
+          var freeWifiBtn = document.getElementById("_freewifibtn");
+          if (freeWifiBtn) {
+              freeWifiBtn.disabled = !element.checked;
+          }
+        }
+
+        function DisplayFlatTarif() {
+          $(document).ready(function () {
+            try {
+              document.getElementById("_flatprice").firstChild.data = "";
+              var PricingIndex =
+                document.getElementById("_flatpricing").options[
+                  document.getElementById("_flatpricing").selectedIndex
+                ].value;
+              document.getElementById("_flatprice").firstChild.data =
+                document.getElementById(
+                  "price" + "_" + PricingIndex
+                ).firstChild.data;
+            } catch (err) {}
+          });
+        }
+
+        // Garante que a primeira aba é mostrada ao carregar se o HTML não o fizer.
+        var $firstButton = $('.pure-tab-button:first');
+        if (!$firstButton.hasClass('active') && $firstButton.length) {
+            $firstButton.click();
+        }
+
+        //6F143793-ACE5-4C04-93EA-C593CD76DC47
+
+      }); // Fim do jQuery(document).ready(function($)
+      
+      /*]]>*/
     </script>
   </body>
 </html>
